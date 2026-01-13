@@ -244,7 +244,7 @@ function Signup() {
             <img
               src={image}
               alt="Fundoo"
-              style={{ width: "280px", marginBottom: "16px" }}
+              style={{ width: "250px", marginBottom: "18px" }}
             />
 
             <Typography variant="body2" color="text.secondary" align="center">
