@@ -24,21 +24,20 @@ export class SignIn extends Component {
       >
         <Card sx={{ width: 400, padding: 3 }}>
           <CardContent>
-            <Typography sx={{color:'blue',fontWeight:'bold',fontSize:'30px'}}variant="h5" textAlign="center" gutterBottom>
+            <Typography sx={{color:'blue',fontWeight:'bold',fontSize:'30px'}}variant="h5"  gutterBottom>
               Fundoo
             </Typography>
 
-            <Typography sx={{fontWeight:'bold',fontSize:'25px'}}variant="h6" textAlign="center" gutterBottom>
+            <Typography sx={{fontWeight:'bold',fontSize:'25px'}}variant="h6"  gutterBottom>
               Sign in
             </Typography>
 
             <Typography
               variant="body2"
-              textAlign="center"
               color="text.secondary"
               sx={{ mb: 3 }}
             >
-              to continue to Google Drive
+              to continue to FunDoo
             </Typography>
             {/* email input */}
             <TextField
