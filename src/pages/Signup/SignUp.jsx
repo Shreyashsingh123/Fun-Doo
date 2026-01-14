@@ -87,7 +87,6 @@ function Signup() {
                 sx={{
                   mt: 0,
                   display: "flex",
-                  // justifyContent: "space-between",
                   alignItems: "center",
                 }}
               >
@@ -141,7 +140,6 @@ function Signup() {
                 onChange={handleChange}
                 error={!!errors.email}
                 helperText={errors.email}
-                // fullWidth
                 margin="normal"
               />
               <Typography sx={{ pl: '0', ml: 0, fontSize: '13px', color: 'text.secondary' }}>
@@ -164,9 +162,7 @@ function Signup() {
                   width: '250px'
                 }}
                   label="Password"
-                  // variant="outlined"
-                  // margin="normal"
-                  type="password"
+                  type="Password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
@@ -251,7 +247,7 @@ function Signup() {
               One account. All of Fundoo working for you
             </Typography>
           </Box>
-
+          
           </Box>
         </CardContent>
       </Card>
