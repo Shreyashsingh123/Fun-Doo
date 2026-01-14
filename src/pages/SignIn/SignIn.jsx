@@ -40,13 +40,13 @@ export class SignIn extends Component {
             >
               to continue to FunDoo
             </Typography>
-            {/* email input */}
-            <TextField
+           
+          <TextField
               label="Email or phone"
               variant="outlined"
               fullWidth
               margin="normal"
-            />
+          />
             <Typography sx={{pl:'0',ml:0,fontSize:'12px',color:'text.secondary'}}>
               use only letters,numbers and periods
             </Typography>
