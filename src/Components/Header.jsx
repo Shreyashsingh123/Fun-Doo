@@ -6,14 +6,10 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MoreIcon from '@mui/icons-material/MoreVert';
 
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
@@ -21,6 +17,8 @@ import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import { useDrawer } from './Side-Bar-Context';
 import Tooltip from '@mui/material/Tooltip';
+import Poper from './Poper';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -56,21 +54,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function App() {
+export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const {toggleDrawer} = useDrawer();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
+   const handleProfileClick = (event) =>{
+    setAnchorEl(anchorEl ? null : event.currentTarget);
+   };
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMenuClose = () => {
+   const handleClose = ()=>{
     setAnchorEl(null);
-    setMobileMoreAnchorEl(null);
-  };
+   };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -84,7 +80,8 @@ export default function App() {
             <MenuIcon />
           </IconButton>
           </Tooltip>
-<Tooltip title="Fundoo">
+          
+  <Tooltip title="Fundoo">
           <img
             src="https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png"
             alt="Keep"
@@ -103,42 +100,41 @@ export default function App() {
           </Search>
 
           <Box sx={{ flexGrow: 1 }} />
-          <Tooltip title="Refresh">
+      <Tooltip title="Refresh">
           <IconButton size="large" color="inherit">
             <RefreshOutlinedIcon />
           </IconButton>
           </Tooltip>
-<Tooltip title="List View">
+      <Tooltip title="List View">
           <IconButton size="large" color="inherit">
             <GridViewOutlinedIcon />
           </IconButton>
           </Tooltip>
-          <Tooltip title="Setting">  
+      <Tooltip title="Setting">  
             <IconButton size="large" color="inherit">
             <SettingsOutlinedIcon />
           </IconButton>
           </Tooltip>
-<Tooltip title="Grid">
+
+      <Tooltip title="Grid">
           <IconButton size="large" color="inherit">
             <AppsOutlinedIcon />
           </IconButton>
           </Tooltip>
-          <IconButton
-            size="large"
-            edge="end"
-            color="inherit"
-            onClick={handleProfileMenuOpen}
-          >
-            <AccountCircle />
-          </IconButton>
-        </Toolbar>
 
-      </AppBar>
-      <Menu anchorEl={anchorEl} open={isMenuOpen} onClose={handleMenuClose}>
-        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-        
-      </Menu>
+      <Tooltip title="Profile">
+            <IconButton onClick={handleProfileClick}>
+              <AccountCircle />
+            </IconButton>
+          </Tooltip>
+       </Toolbar>
+   </AppBar>
+  <Toolbar/>
+      
+<Poper anchorEl={anchorEl} onClose={handleClose} />
     </Box>
   );
 }
+
+
+
