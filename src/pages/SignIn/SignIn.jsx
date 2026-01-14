@@ -24,17 +24,18 @@ export class SignIn extends Component {
       >
         <Card sx={{ width: 400, padding: 3 }}>
           <CardContent>
-            <Typography sx={{color:'blue',fontWeight:'bold',fontSize:'30px'}}variant="h5"  gutterBottom>
+            <Typography sx={{color:'blue',fontWeight:'bold',fontSize:'30px'}}variant="h5" textAlign="center" gutterBottom>
               Fundoo
             </Typography>
 
-            <Typography sx={{fontWeight:'bold',fontSize:'25px'}}variant="h6"  gutterBottom>
+            <Typography sx={{fontWeight:'bold',fontSize:'25px'}}variant="h6" textAlign="center" gutterBottom>
               Sign in
             </Typography>
 
             <Typography
               variant="body2"
               color="text.secondary"
+              textAlign="center"
               sx={{ mb: 3 }}
             >
               to continue to FunDoo
