@@ -20,6 +20,7 @@ import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import { useDrawer } from './Side-Bar-Context';
+import Tooltip from '@mui/material/Tooltip';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -78,17 +79,20 @@ export default function App() {
         sx={{ backgroundColor: '#fff', color: '#000', top:0,left:0,zIndex:(theme) => theme.zIndex.drawer+1}}
       >
         <Toolbar>
+          <Tooltip title="Main menu">
           <IconButton size="large" edge="start" color="inherit" onClick={toggleDrawer}>
             <MenuIcon />
           </IconButton>
-
+          </Tooltip>
+<Tooltip title="Fundoo">
           <img
             src="https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png"
             alt="Keep"
             style={{ width: 40, height: 40 }}
           />
+          </Tooltip>
           <Typography variant="h6" sx={{ ml: 1, mr: 3 }}>
-            Keep
+            FunDoo
           </Typography>
 
           <Search>
@@ -99,22 +103,26 @@ export default function App() {
           </Search>
 
           <Box sx={{ flexGrow: 1 }} />
-
+          <Tooltip title="Refresh">
           <IconButton size="large" color="inherit">
             <RefreshOutlinedIcon />
           </IconButton>
-
+          </Tooltip>
+<Tooltip title="List View">
           <IconButton size="large" color="inherit">
             <GridViewOutlinedIcon />
           </IconButton>
-
-          <IconButton size="large" color="inherit">
+          </Tooltip>
+          <Tooltip title="Setting">  
+            <IconButton size="large" color="inherit">
             <SettingsOutlinedIcon />
           </IconButton>
-
+          </Tooltip>
+<Tooltip title="Grid">
           <IconButton size="large" color="inherit">
             <AppsOutlinedIcon />
           </IconButton>
+          </Tooltip>
           <IconButton
             size="large"
             edge="end"
