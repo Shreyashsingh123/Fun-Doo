@@ -12,6 +12,7 @@ import {
 import GoogleIcon from "@mui/icons-material/Google";
 import image from '../../assets/signup.jpeg'
 import { useNavigate,Link } from 'react-router-dom';
+import api from '../../services/Api';
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -31,37 +32,57 @@ function Signup() {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     let newErrors = {};
-
+  
     if (!formData.firstName.match(/^[A-Za-z]{2,}$/)) {
-      newErrors.firstName = "Enter a valid first name";
+      newErrors.firstName = "enter a valid first name*";
     }
-
+  
     if (!formData.lastName.match(/^[A-Za-z]{2,}$/)) {
-      newErrors.lastName = "Enter a valid last name";
+      newErrors.lastName = "enter a valid last name*";
     }
-
+  
     if (!formData.email.endsWith("@gmail.com")) {
-      newErrors.email = "Email must end with @gmail.com";
+      newErrors.email = "email must end with @gmail.com*";
     }
-
+  
     if (formData.password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters";
+      newErrors.password = "password must be at least 8 characters*";
     }
-
+  
     if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match";
+      newErrors.confirmPassword = "passwords do not match*";
     }
-
+  
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-    } else {
-      setErrors({});
-      navigate('/');
+      return;
+    }
+  
+    try {
+      //Check if email exist o rnot
+      const res = await api.get(`/users?email=${formData.email}`);
+  
+      if (res.data.length > 0) {
+        setErrors({ email: "Email already registered*" });
+        return;
+      }
+  
+      // To save user to Json
+      await api.post("/users", {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        password: formData.password,
+      });
+  
+      alert("Account Created successful");
+      navigate("/signin");
+    } catch (err) {
+      console.error(err);
     }
   };
-
   return (
     <Box
       sx={{
@@ -77,11 +98,14 @@ function Signup() {
         <CardContent>
           <Box sx={{ display: "flex" }}>
             <Box sx={{ flex: 1, pr: 4 }}>
-              <Typography sx={{ color: 'blue', fontSize: '28px', fontWeight: 'bold' }} textAlign="start">
+              <Typography sx={{ color: 'blue', fontSize: '30px', fontWeight: 'bold' }} textAlign="start">
                 Fundoo
               </Typography>
               <Typography sx={{ fontWeight: 'bold', color: 'black', fontSize: '25px' }} textAlign="start">
                 Create your Fundoo Account
+              </Typography>
+              <Typography sx={{ opacity:0.7,color: 'black', fontSize: '20px' }} textAlign="start">
+                to continue to fundoo
               </Typography>
               <Box
                 sx={{
@@ -162,7 +186,7 @@ function Signup() {
                   width: '250px'
                 }}
                   label="Password"
-                  type="Password"
+                  type="password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
@@ -180,7 +204,6 @@ function Signup() {
                     width: '250px'
                   }}
                   label="Confirm Password"
-                  varian="outline"
                   margin="normal"
                   name="confirmPassword"
                   value={formData.confirmPassword}
@@ -212,7 +235,7 @@ function Signup() {
                   }}
                   component={Link} to="/SignIn"
                 >
-                  SIGN IN INSTEAD
+                  Back to SignIn
                 </Button>
 
                 <Button
@@ -240,11 +263,11 @@ function Signup() {
             <img
               src={image}
               alt="Fundoo"
-              style={{ width: "250px", marginBottom: "18px" }}
+              style={{ width: "230px", marginBottom: "0px" }}
             />
 
             <Typography variant="body2" color="text.secondary" align="center">
-              One account. All of Fundoo working for you
+              One account. All of Fundoo <br/>working for you
             </Typography>
           </Box>
           
