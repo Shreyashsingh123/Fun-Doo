@@ -18,7 +18,9 @@ import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import { useDrawer } from './Side-Bar-Context';
 import Tooltip from '@mui/material/Tooltip';
 import Poper from './Poper';
-
+import {useLocation} from 'react-router-dom';
+import FunDoo from '../Dashboard/FunDoo';
+import ViewStreamOutlinedIcon from '@mui/icons-material/ViewStreamOutlined';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -56,8 +58,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const {toggleDrawer} = useDrawer();
+  const {toggleDrawer,handlepattern,click} = useDrawer();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const location = useLocation();
+  const title=location.pathname ==='/' ? 'FunDoo' : location.pathname.slice(1).charAt(0).toUpperCase() + location.pathname.slice(2);
 
   const isMenuOpen = Boolean(anchorEl);
    const handleProfileClick = (event) =>{
@@ -85,11 +89,11 @@ export default function Header() {
           <img
             src="https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png"
             alt="Keep"
-            style={{ width: 40, height: 40 }}
+            style={{ width: 40, height: 40,display:title ==='FunDoo' ? 'block' : 'none' }}
           />
           </Tooltip>
           <Typography variant="h6" sx={{ ml: 1, mr: 3 }}>
-            FunDoo
+           {title}
           </Typography>
 
           <Search>
@@ -101,29 +105,29 @@ export default function Header() {
 
           <Box sx={{ flexGrow: 1 }} />
       <Tooltip title="Refresh">
-          <IconButton size="large" color="inherit">
+          <IconButton style={{opacity:'0.5'}} size="large" color="inherit">
             <RefreshOutlinedIcon />
           </IconButton>
           </Tooltip>
-      <Tooltip title="List View">
-          <IconButton size="large" color="inherit">
-            <GridViewOutlinedIcon />
-          </IconButton>
-          </Tooltip>
+     
+          <IconButton style={{opacity:'0.5'}} size="large" color="inherit" onClick={handlepattern}>
+            {click?<Tooltip title="list view"><GridViewOutlinedIcon /></Tooltip>:<Tooltip title="grid view"><ViewStreamOutlinedIcon /></Tooltip>}
+          </IconButton> 
+         
       <Tooltip title="Setting">  
-            <IconButton size="large" color="inherit">
+            <IconButton style={{opacity:'0.5'}} size="large" color="inherit">
             <SettingsOutlinedIcon />
           </IconButton>
           </Tooltip>
 
       <Tooltip title="Grid">
-          <IconButton size="large" color="inherit">
+          <IconButton style={{opacity:'0.5'}} size="large" color="inherit">
             <AppsOutlinedIcon />
           </IconButton>
           </Tooltip>
 
       <Tooltip title="Profile">
-            <IconButton onClick={handleProfileClick}>
+            <IconButton style={{opacity:'0.5'}} onClick={handleProfileClick}>
               <AccountCircle />
             </IconButton>
           </Tooltip>
